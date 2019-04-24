@@ -8,4 +8,4 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.listen(3001,()=>{`Helo Mark2 ready on port 3001`})
+app.listen(3001,()=>{console.log(`Helo Mark2 ready on port 3001`)})
