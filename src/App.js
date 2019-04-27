@@ -5,15 +5,13 @@ import Auth from './Components/Auth/Auth';
 import Dashboard from './Components/Dashboard/Dashboard';
 import Form from './Components/Form/Form';
 import Post from './Components/Post/Post';
+import routes from './routes'; 
 
 function App() {
   return (
     <div className="App">
       <Nav/>
-      <Auth/>
-      <Dashboard/>
-      <Form/>
-      <Post/>
+      {routes}
     </div>
   );
 }

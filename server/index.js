@@ -8,4 +8,12 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.listen(3001,()=>{console.log(`Helo Mark2 ready on port 3001`)})
+const { CONNECTION_STRING } = process.env
+
+massive(CONNECTION_STRING).then(db => {
+    app.set('db', db);
+    app.listen(3001,()=>{console.log(`Helo Mark2 ready on port 3001`)})
+})
+
+app.post('/auth/register', ctrl.register)
+app.post('/auth/login', ctrl.login)
