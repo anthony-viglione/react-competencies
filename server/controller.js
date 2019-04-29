@@ -13,6 +13,9 @@ module.exports = {
         console.log('hit controller login')
         console.log({body: req.body})
         const {username, password} = req.body;
-        
+        const db =req.app.get('db');
+        let loggedInUser = await db.login_user({username, password})
+        console.log(loggedInUser)
+        res.status(200).send(loggedInUser)
     }
 }

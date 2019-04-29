@@ -27,15 +27,27 @@ class Auth extends Component{
             console.log('try')
             let res = await axios.post('/auth/register', user)
             console.log(res.data)
+            this.props.history.push('/dashboard')
         } catch(err) {
-            console.log('hit')
+            console.log('hit catch')
             console.log(err)
         }
-        this.props.history.push('/dashboard')
     }
 
-    async login(){
+    login = async() => {
         console.log('hit login')
+        let user = {
+            username: this.state.name,
+            password: this.state.password
+        }
+        try {
+            let res = await axios.post('/auth/login', user)
+            console.log(res.data)
+            this.props.history.push('/dashboard')
+        } catch(err) {
+            console.log('hit catch')
+            console.log(err)
+        }
     }
 
     render(){
@@ -63,8 +75,14 @@ class Auth extends Component{
                                 onChange={(e)=>this.handleChange('password',e.target.value)}
                                 />
                     </div>
-                    <button>Login</button>
-                    <button onClick={()=>this.register()}>Register</button>
+                    <button
+                        onClick={()=>this.login()}>
+                            Login
+                    </button>
+                    <button 
+                        onClick={()=>this.register()}>
+                            Register
+                    </button>
                 </div>
             )
         // }
