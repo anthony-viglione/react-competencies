@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 
 
 class Nav extends Component{
@@ -26,10 +28,18 @@ class Nav extends Component{
                             Logout
                         </button>
                     </Link>
+                    <h1>Name:{this.props.username}</h1>
+                    <img src={this.props.profilePic}/>
                 </div>
             )
         // }
     }
 }
+const mapStateToProps = reduxState => {
+    return {
+        username: reduxState.username,
+        profilePic: reduxState.profilePic
+    }
+}
 
-export default Nav;
+export default connect(mapStateToProps)(Nav);

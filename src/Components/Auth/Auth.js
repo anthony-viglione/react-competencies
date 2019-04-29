@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { updateUser } from '../../ducks/reducer'
 
 class Auth extends Component{
     constructor(){
@@ -26,7 +28,9 @@ class Auth extends Component{
         try {
             console.log('try')
             let res = await axios.post('/auth/register', user)
-            console.log(res.data)
+            console.log(res.data[0])
+            let { id, username, profile_pic } = res.data[0]
+            this.props.updateUser(username, id, profile_pic)
             this.props.history.push('/dashboard')
         } catch(err) {
             console.log('hit catch')
@@ -42,7 +46,9 @@ class Auth extends Component{
         }
         try {
             let res = await axios.post('/auth/login', user)
-            console.log(res.data)
+            console.log(res.data[0])
+            let { id, username, profile_pic } = res.data[0]
+            this.props.updateUser(username, id, profile_pic)
             this.props.history.push('/dashboard')
         } catch(err) {
             console.log('hit catch')
@@ -66,13 +72,13 @@ class Auth extends Component{
                     <div>
                         name
                             <input 
-                                onChange={(e)=> this.handleChange('name',e.target.value)}
+                                onChange={(e)=> this.handleChange('name', e.target.value)}
                                 />
                     </div>
                     <div>
                         password
                             <input 
-                                onChange={(e)=>this.handleChange('password',e.target.value)}
+                                onChange={(e)=>this.handleChange('password', e.target.value)}
                                 />
                     </div>
                     <button
@@ -89,4 +95,8 @@ class Auth extends Component{
     }
 }
 
-export default Auth;
+const mapDispatchToProps ={ //reducer holds the methods
+    updateUser
+}
+
+export default connect(null, mapDispatchToProps) (Auth);
