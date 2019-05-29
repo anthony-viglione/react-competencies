@@ -15,7 +15,7 @@ class Dashboard extends Component{
     }
 
     componentDidMount(){
-        this.posts()
+        this.search()
     }
 
     handleChange = (prop) =>{
@@ -24,15 +24,15 @@ class Dashboard extends Component{
         })
     }
 
-    posts = async() => {
+    search = async() => {
         const { id } = this.props
         const { search, check } = this.state
         console.log(search, check)
-        let apples = {type:'gala', number:5}
         let res = await axios.get(`/getposts/${id}?search=${search}&check=${check}`)    //get requests don't have bodies so use queries and params
         console.log({dashboardPostsRes: res})
         this.setState({
-            posts: res.data
+            posts: res.data,
+            search: ''
         })
     }
 
@@ -70,7 +70,7 @@ class Dashboard extends Component{
                     Include My Posts
                 </div>
                 <div>
-                    <button>
+                    <button onClick={()=>{this.search()}}>
                         Search
                     </button>
                     <button>
