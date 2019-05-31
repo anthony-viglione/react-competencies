@@ -55,5 +55,4 @@ module.exports = {
     getsinglepost: async (req, res) => {
         console.log('hit controller get single post')
     }
-    }
 }
