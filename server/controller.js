@@ -54,5 +54,11 @@ module.exports = {
     },
     getsinglepost: async (req, res) => {
         console.log('hit controller get single post')
+        const { id } = req.params;
+        console.log(id);
+        const db = req.app.get('db');
+        let singlePost = await db.single_post({id})
+        res.status(200).send(singlePost)
+
     }
 }
